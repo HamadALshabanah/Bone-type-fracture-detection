@@ -9,11 +9,10 @@ from skimage.filters import butterworth
 from skimage.filters import gaussian
 from skimage import exposure
 
-model = torch.load('SWIN_mura_phase_3_v2_7epoch.pth')
+model = torch.load('Models weights\googlenet_mura_phase_3_20epoch.pth')
 model = model.to('cpu')
 
-
-image = Image.open(r"D:\Users\hamad\Documents\GP2\MURA-v1.1\train\XR_HAND\patient00135\study1_negative\image3.png")
+image = Image.open(r"MURA-v1.1\valid\XR_SHOULDER\patient11187\study1_negative\image1.png")
 image = image.convert('RGB')
  # Convert PIL Image to numpy array
 image_np = np.array(image)
@@ -54,8 +53,10 @@ image = transform(image)
 transformed_image = image.unsqueeze(0)
 with torch.no_grad():
     output = model(transformed_image)
-    logits = output.logits
-    _, predicted_indices = torch.max(logits, 1)
+    # Remove Comment For SWIN transformer
+    #logits = output.logits 
+    #replace output with logits for SWIN
+    _, predicted_indices = torch.max(output, 1)
     predicted_index = predicted_indices.item()  # Convert tensor to Python number
 
 
