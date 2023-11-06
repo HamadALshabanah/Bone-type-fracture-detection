@@ -12,3 +12,6 @@ vit_bagging_model_weights.pth
 /VitEns
 /Unused Notebooks
 /Models weights
+/Weights
+/Code-to-submit
+*.zip
